@@ -1,7 +1,29 @@
-import { View, TextInput, StyleSheet } from "react-native";
+import { useState } from "react";
+import { View, TextInput, StyleSheet, Alert } from "react-native";
 import PrimaryButton from "../components/PrimaryComponets";
 
 function StartGameScreen() {
+  const [enteredNumber, setEnteredNumber] = useState("");
+
+  function numberInputHandler(enteredText) {
+    setEnteredNumber(enteredText);
+  }
+
+    function resetInput(){
+      setEnteredNumber('');
+    }
+  function confirmInputHandler() {
+    const chosenNumber = parseInt(enteredNumber);
+    if (isNaN(chosenNumber) || chosenNumber < 0 || chosenNumber > 100) {
+      Alert.alert(
+        "Invalid number",
+        "Number has to be in between 0 to 100 only",
+        [{text: 'Okay' , style: "destructive"  , onPress: resetInput} ]
+      );
+      return;
+    }
+    console.log('Valid Number')
+  }
   return (
     <View style={styles.inputContainer}>
       <TextInput
@@ -10,13 +32,15 @@ function StartGameScreen() {
         keyboardType="number-pad"
         autoCapitalize="none"
         autoCorrect={false}
+        onChange={numberInputHandler}
+        value={enteredNumber}
       />
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
           <PrimaryButton>Reset</PrimaryButton>
         </View>
         <View style={styles.buttonContainer}>
-          <PrimaryButton>Confirm</PrimaryButton>
+          <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
         </View>
       </View>
     </View>
@@ -42,10 +66,10 @@ const styles = StyleSheet.create({
   numberInput: {
     height: 50,
     width: 60,
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 28,
     borderBottomColor: "#ddb52f",
-    borderBottomWidth: 3, 
+    borderBottomWidth: 3,
     color: "#ddb52f",
     marginVertical: 8,
     fontWeight: "bold",
@@ -54,7 +78,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   buttonContainer: {
-    flex:1,
+    flex: 1,
     marginHorizontal: 8,
-  }
+  },
 });
