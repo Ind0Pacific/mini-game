@@ -5,7 +5,7 @@ import { useState } from "react";
 import GameScreen from "./screens/GameScreen";
 
 export default function App() {
-  const [userNumber , setUserName] = useState();
+  const [userNumber, setUserNumber] = useState();
 
   function pickedNumberHandler(pickedNumber){
     setUserNumber(pickedNumber);
@@ -16,7 +16,7 @@ export default function App() {
     screen = <GameScreen/>
   }
 
-  return (
+ return (
     <LinearGradient colors={["#72063c", "#ddb52f"]} style={styles.rootScreen}>
       <ImageBackground 
         source={require('./assets/images/background.png')} 
@@ -24,7 +24,7 @@ export default function App() {
         style={styles.rootScreen}
         imageStyle={styles.backgroundImage}
       >
-        <StartGameScreen />
+        {screen}
       </ImageBackground>
     </LinearGradient>
   );

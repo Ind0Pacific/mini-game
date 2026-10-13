@@ -32,7 +32,7 @@ function StartGameScreen({onPickNumber}) {
         keyboardType="number-pad"
         autoCapitalize="none"
         autoCorrect={false}
-        onChange={numberInputHandler}
+        onChangeText={numberInputHandler}
         value={enteredNumber}
       />
       <View style={styles.buttonsContainer}>
