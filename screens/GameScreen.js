@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { useState } from "react ";
 import Title from "../components/Title";
 import NumberContaine from "../components/game/NumberContainer";
-import PrimaryButton from "../components/ui/PrimaryComponets"
+import PrimaryButton from "../components/ui/PrimaryComponets "
 
 
 function generateRandomBetween(min, max, exclude) {
@@ -15,17 +15,30 @@ function generateRandomBetween(min, max, exclude) {
   }
 }
 
+let minBoundary = 0;
+let maxBoundary = 101; 
 
 function GameScreen({userNumber}) {
-  const initialGuess = generateRandomBetween(0 , 101 ,userNumber ); 
+  const initialGuess = generateRandomBetween(minBoundary , maxBoundary ,userNumber ); 
   const [currentGuess , setCurrentGuess] = useState(initialGuess);
+
+  function nextGuessHandler(direction){
+      if(direction == 'lower'){
+        maxBoundary = currentGuess;
+        generateRandomBetween(minBoundary , maxBoundary , currentGuess);
+      }
+  }
 
   return (
     <View style={styles.screen}>
       <Title>Opponent's Guess</Title>
       <NumberContaine>{}currentGuess</NumberContaine>
       <Text>Higher or lower?</Text>
-      <PrimaryButton
+      <View>
+         <PrimaryButton onPress={}>+</PrimaryButton>
+      <PrimaryButton onPress={}>-</PrimaryButton>
+      </View>
+ 
       <View></View>
     </View>
   );
