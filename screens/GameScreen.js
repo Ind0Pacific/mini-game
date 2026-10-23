@@ -1,9 +1,8 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import { useState } from "react ";
 import Title from "../components/Title";
 import NumberContaine from "../components/game/NumberContainer";
-import PrimaryButton from "../components/ui/PrimaryComponets "
-
+import PrimaryButton from "../components/ui/PrimaryComponets ";
 
 function generateRandomBetween(min, max, exclude) {
   const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -16,17 +15,38 @@ function generateRandomBetween(min, max, exclude) {
 }
 
 let minBoundary = 0;
-let maxBoundary = 101; 
+let maxBoundary = 101;
 
-function GameScreen({userNumber}) {
-  const initialGuess = generateRandomBetween(minBoundary , maxBoundary ,userNumber ); 
-  const [currentGuess , setCurrentGuess] = useState(initialGuess);
+function GameScreen({ userNumber }) {
+  const initialGuess = generateRandomBetween(
+    minBoundary,
+    maxBoundary,
+    userNumber,
+  );
+  const [currentGuess, setCurrentGuess] = useState(initialGuess);
 
-  function nextGuessHandler(direction){
-      if(direction == 'lower'){
-        maxBoundary = currentGuess;
-        generateRandomBetween(minBoundary , maxBoundary , currentGuess);
-      }
+  function nextGuessHandler(direction) {
+    if (
+      (direction === "lower" && currentGuess < userNumber) ||
+      (direction === "greater " && currentGuess > userNumber)
+    ) {
+      Alert.alert(
+        "You know that this is a lie and still you choose this , Why?",
+        [{ text: "Sorry", style: "cancel" }],
+      );
+      return;
+    }
+    if (direction === "lower") {
+      maxBoundary = currentGuess;
+    } else {
+      minBoundary = currentGuess + 1;
+    }
+    const newRndNumber = generateRandomBetween(
+      minBoundary,
+      maxBoundary,
+      currentGuess,
+    );
+    setCurrentGuess(newRndNumber);
   }
 
   return (
@@ -35,10 +55,14 @@ function GameScreen({userNumber}) {
       <NumberContaine>{}currentGuess</NumberContaine>
       <Text>Higher or lower?</Text>
       <View>
-         <PrimaryButton onPress={}>+</PrimaryButton>
-      <PrimaryButton onPress={}>-</PrimaryButton>
+        <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
+          -
+        </PrimaryButton>
+        <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
+          +
+        </PrimaryButton>
       </View>
- 
+
       <View></View>
     </View>
   );
