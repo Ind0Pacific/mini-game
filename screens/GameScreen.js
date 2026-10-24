@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Alert } from "react-native";
-import { useState } from "react ";
+import { useState , useEffect } from "react ";
 import Title from "../components/Title";
 import NumberContaine from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryComponets ";
@@ -17,13 +17,18 @@ function generateRandomBetween(min, max, exclude) {
 let minBoundary = 0;
 let maxBoundary = 101;
 
-function GameScreen({ userNumber }) {
+function GameScreen({ userNumber , onGameOver }) {
   const initialGuess = generateRandomBetween(
-    minBoundary,
-    maxBoundary,
+    0,
+    101,
     userNumber,
   );
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
+  useEffect(() => {
+    if(currentGuess === userNumber){
+      onGameOver();
+    }
+  }, [currentGuess , userNumber , onGameOver]);
 
   function nextGuessHandler(direction) {
     if (
@@ -32,7 +37,7 @@ function GameScreen({ userNumber }) {
     ) {
       Alert.alert(
         "You know that this is a lie and still you choose this , Why?",
-        [{ text: "Sorry", style: "cancel" }],
+        [{ text: "Say Sorry to system", style: "cancel" }],
       );
       return;
     }
