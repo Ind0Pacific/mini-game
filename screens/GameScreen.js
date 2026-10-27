@@ -1,8 +1,8 @@
 import { View, StyleSheet, Alert } from "react-native";
-import { useState, useEffect } from "react ";
-import Title from "../components/Title";
-import NumberContaine from "../components/game/NumberContainer";
-import PrimaryButton from "../components/ui/PrimaryComponets ";
+import { useState, useEffect } from "react";
+import Title from "../components/ui/Title";
+import NumberContainer from "../components/game/NumberContainer";
+import PrimaryButton from "../components/ui/PrimaryComponets";
 import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";
 
@@ -22,6 +22,7 @@ let maxBoundary = 101;
 function GameScreen({ userNumber, onGameOver }) {
   const initialGuess = generateRandomBetween(0, 101, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
+
   useEffect(() => {
     if (currentGuess === userNumber) {
       onGameOver();
@@ -31,10 +32,10 @@ function GameScreen({ userNumber, onGameOver }) {
   function nextGuessHandler(direction) {
     if (
       (direction === "lower" && currentGuess < userNumber) ||
-      (direction === "greater " && currentGuess > userNumber)
+      (direction === "greater" && currentGuess > userNumber)
     ) {
       Alert.alert(
-        "You know that this is a lie and still you choose this , Why?",
+        "You know that this is a lie and still you choose this, Why?",
         [{ text: "Say Sorry to system", style: "cancel" }],
       );
       return;
@@ -55,7 +56,7 @@ function GameScreen({ userNumber, onGameOver }) {
   return (
     <View style={styles.screen}>
       <Title>Opponent's Guess</Title>
-      <NumberContaine>{}currentGuess</NumberContaine>
+      <NumberContainer>{currentGuess}</NumberContainer>
       <InstructionText>Higher or lower?</InstructionText>
       <Card>
         <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
@@ -65,13 +66,13 @@ function GameScreen({ userNumber, onGameOver }) {
           +
         </PrimaryButton>
       </Card>
-
       <View></View>
     </View>
   );
 }
 
 export default GameScreen;
+
 const styles = StyleSheet.create({
   screen: {
     flex: 1,

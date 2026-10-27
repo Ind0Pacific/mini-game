@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { View, StyleSheet, Alert } from "react-native";
-import PrimaryButton from "../components/PrimaryComponets";
+import { View, StyleSheet, Alert, TextInput } from "react-native";
+import Title from "../components/ui/Title";
+import PrimaryButton from "../components/ui/PrimaryComponets";
 import Colors from "../constants/Colors.js";
 import Card from "../components/ui/Card.js";
 import InstructionText from "../components/ui/InstructionText.js";
@@ -15,6 +16,7 @@ function StartGameScreen({ onPickNumber }) {
   function resetInput() {
     setEnteredNumber("");
   }
+  
   function confirmInputHandler() {
     const chosenNumber = parseInt(enteredNumber);
     if (isNaN(chosenNumber) || chosenNumber < 0 || chosenNumber > 100) {
@@ -27,11 +29,12 @@ function StartGameScreen({ onPickNumber }) {
     }
     onPickNumber(chosenNumber);
   }
+  
   return (
     <View style={styles.rootContainer}>
-      <title>Guess My NUmber!!</title>
+      <Title>Guess My Number!!</Title>
       <Card>
-        <InstructionText> Enter a Number</InstructionText>
+        <InstructionText>Enter a Number</InstructionText>
         <TextInput
           style={styles.numberInput}
           maxLength={2}
@@ -43,7 +46,7 @@ function StartGameScreen({ onPickNumber }) {
         />
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
-            <PrimaryButton>Reset</PrimaryButton>
+            <PrimaryButton onPress={resetInput}>Reset</PrimaryButton>
           </View>
           <View style={styles.buttonContainer}>
             <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>

@@ -1,7 +1,6 @@
-import { Text } from "react-native/types_generated/index";
+import { Text } from "react-native";
 
-
-function GameOverScreen(){
-    return <Text>Game Over</Text>
- }
- export default GameOverScreen;
+function GameOverScreen() {
+  return <Text>Game Over</Text>;
+}
+export default GameOverScreen;
