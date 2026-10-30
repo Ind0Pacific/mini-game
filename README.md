@@ -1,22 +1,33 @@
-# 🎯 Guess My Number Game
+# Guess My Number 🎯
 
-A complete React Native demo app built to explore core mobile development fundamentals. Instead of the usual "phone picks, user guesses" twist, **you** think of a number and the phone tries to figure it out using your hints.
+A fun, interactive mobile mini-game built with **React Native** and **Expo**. In this game, the player chooses a number between 1 and 100, and the device attempts to guess it. The player provides hints (Higher or Lower) until the device successfully narrows down the correct number.
 
-## 📱 About
+## 🚀 Features
+* **Interactive Gameplay**: Device calculates the next guess based on user feedback.
+* **Validation & Error Handling**: Prevents users from inputting out-of-bounds numbers or providing false "Higher/Lower" hints.
+* **Custom UI Components**: Reusable modular components like `PrimaryButton`, `Card`, and `Title`.
+* **Dynamic Styling**: Beautiful UI incorporating `expo-linear-gradient` and custom `ImageBackground` assets.
+* **Cross-Platform**: Runs seamlessly on both Android and iOS.
 
-This project is a fully-featured React Native application designed as a hands-on demo of essential development concepts — component architecture, navigation, styling, and state management — wrapped in a fun, interactive game.
+## 🛠️ Tech Stack
+* **Framework:** React Native, Expo
+* **Language:** JavaScript
+* **Development Environment:** Visual Studio Code
+* **Testing/Preview:** Expo Go (Android & iOS), Metro Bundler
 
-The user picks a secret number between 0 and 100, and the app makes educated guesses. After each guess, the user tells the phone whether it's too high or too low, and the app narrows down its next guess until it nails it.
-
-## ✨ Features
-
-### Gameplay
-- 🔢 Enter a secret number between **0 and 100**
-- 🤖 The phone attempts to guess your number
-- ⬆️⬇️ Give hints — tell the app if its guess is too high or too low
-- 🏆 Round tracking: see exactly how many turns it took to be guessed
-
-### Navigation & UX
-- 🧭 Multi-screen navigation between game flows
-- 🎨 Advanced styling with complex layouts, gradients, and background images
-- ♻️ Reusable, custom-built UI components
+## 📂 Project Structure
+```text
+miniGame/
+ ├── assets/                 # Images, fonts, and app icons (background.png, etc.)
+ ├── components/             # Reusable UI components
+ │    ├── game/              # Game-specific components (NumberContainer.js)
+ │    ├── ui/                # Generic UI elements (Card.js, PrimaryComponents.js, InstructionText.js)
+ │    └── Title.js           # Custom typography component
+ ├── constants/              # Global variables
+ │    └── Colors.js          # Centralized color palette
+ ├── screens/                # Main application screens
+ │    ├── StartGameScreen.js # Initial input screen
+ │    ├── GameScreen.js      # Active gameplay screen
+ │    └── GameOverScreen.js  # Result and summary screen
+ ├── App.js                  # Entry point and screen routing
+ └── package.json            # Project dependencies and scripts
