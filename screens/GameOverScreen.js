@@ -1,6 +1,7 @@
 import { StyleSheet, View, Image, Text } from "react-native";
 import Title from "../components/ui/Title";
 import Colors from "../constants/Colors";
+import PrimaryButton from "../components/ui/PrimaryComponets"; 
 
 function GameOverScreen() {
   return (
@@ -16,6 +17,7 @@ function GameOverScreen() {
           Your device needs <Text style={styles.Highlight}>X</Text> no of rounds
           to guesss the number <Text style={styles.Highlight}>Y</Text>.
         </Text>
+        <PrimaryButton>Start New Game</PrimaryButton>
     </View>
   );
 }
@@ -44,6 +46,8 @@ const styles = StyleSheet.create({
   summaryText: {
     fontFamily: "open-sans",
     fontSize:24,
+    textAlign:"center",
+    marginBottom:24,
   },
   Highlight: {
     fontFamily: "open-sans-bold",
