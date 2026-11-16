@@ -3,16 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-    "expo": "~57.0.27",
-    "expo-status-bar": "~57.0.1",
-    "react": "19.2.3",
-    "react-native": "0.86.3"
+    "@react-native/assets-registry": "^0.88.1",
+    "expo": "~58.0.8",
+    "expo-linear-gradient": "~58.0.3",
+    "react": "19.3.0",
+    "react-native": "0.88.0"
   },
-  "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web"
-  },
-  "private": true
+  "overrides": {
+    "postcss": "^8.5.23",
+    "image-size": "^2.0.3"
+  }
 }
