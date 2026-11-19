@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { View, StyleSheet, Alert, TextInput , useWindowDimensions } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Alert,
+  TextInput,
+  useWindowDimensions,
+  KeyboardAvoidingView,
+  ScrollView
+} from "react-native";
 import Title from "../components/ui/Title";
 import PrimaryButton from "../components/ui/PrimaryComponets";
 import Colors from "../constants/Colors.js";
@@ -9,7 +17,7 @@ import InstructionText from "../components/ui/InstructionText.js";
 function StartGameScreen({ onPickNumber }) {
   const [enteredNumber, setEnteredNumber] = useState("");
 
-  const {width , height} = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
 
   function numberInputHandler(enteredText) {
     setEnteredNumber(enteredText);
@@ -18,7 +26,7 @@ function StartGameScreen({ onPickNumber }) {
   function resetInput() {
     setEnteredNumber("");
   }
-  
+
   function confirmInputHandler() {
     const chosenNumber = parseInt(enteredNumber);
     if (isNaN(chosenNumber) || chosenNumber < 0 || chosenNumber > 100) {
@@ -31,11 +39,13 @@ function StartGameScreen({ onPickNumber }) {
     }
     onPickNumber(chosenNumber);
   }
-  
+
   const marginTopDistance = height < 380 ? 30 : 100;
 
   return (
-    <View style={[styles.rootContainer , {marginTop: marginTopDistance}]}>
+    <ScrollView style={styles.screen} >
+    <KeyboardAvoidingView style={styles.screen} behavior="position">
+    <View style={[styles.rootContainer, { marginTop: marginTopDistance }]}>
       <Title>Guess My Number!!</Title>
       <Card>
         <InstructionText>Enter a Number</InstructionText>
@@ -58,6 +68,8 @@ function StartGameScreen({ onPickNumber }) {
         </View>
       </Card>
     </View>
+    </KeyboardAvoidingView>
+    </ScrollView>
   );
 }
 export default StartGameScreen;
@@ -66,8 +78,11 @@ export default StartGameScreen;
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-   // marginTop: deviceHeight < 380 ? 30 : 100,
-    alignItems: 'center',
+    // marginTop: deviceHeight < 380 ? 30 : 100,
+    alignItems: "center",
+  },
+  screen: {
+    flex:1
   },
   numberInput: {
     height: 50,
