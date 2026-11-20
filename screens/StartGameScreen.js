@@ -39,7 +39,7 @@ function StartGameScreen({ onPickNumber }) {
     }
     onPickNumber(chosenNumber);
   }
-
+//updte 
   const marginTopDistance = height < 380 ? 30 : 100;
 
   return (
