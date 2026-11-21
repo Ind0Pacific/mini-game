@@ -1,28 +1,50 @@
-import { StyleSheet, View, Image, Text , Dimensions } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  useWindowDimensions,
+  ScrollView,
+ } from "react-native";
 import Title from "../components/ui/Title";
 import Colors from "../constants/Colors";
-import PrimaryButton from "../components/ui/PrimaryComponets"; 
+import PrimaryButton from "../components/ui/PrimaryComponets";
 
-function GameOverScreen({rondsNumber , userNumber , onStartNewGame}) {
+function GameOverScreen({ rondsNumber, userNumber, onStartNewGame }) {
+  const { width, height } = useWindowDimensions();
+
+  let imageSize = 300;
+  if (width < 380) imageSize = 150;
+  if (height < 400) imageSize = 80;
+
+  const imageStyle = {
+    width: imageSize,
+    height: imageSize,
+    borderRadius: imageSize / 2,
+  };
+
   return (
+    <ScrollView style={styles.screen}>
     <View style={styles.rootContainer}>
       <Title>Game OVER</Title>
-      <View style={styles.imageConatiner}>
+      <View style={[styles.imageConatiner, imageSize]}>
         <Image
           style={styles.image}
           src={require("../assets/images/success.png")}
         />
       </View>
-        <Text style={styles.summaryText}>
-          Your device needs <Text style={styles.Highlight}>{rondsNumber}</Text> no of rounds
-          to guesss the number <Text style={styles.Highlight}>{userNumber}</Text>.
-        </Text>
-        <PrimaryButton onPress={onStartNewGame}>Start New Game</PrimaryButton>
+      <Text style={styles.summaryText}>
+        Your device needs <Text style={styles.Highlight}>{rondsNumber}</Text> no
+        of rounds to guesss the number{" "}
+        <Text style={styles.Highlight}>{userNumber}</Text>.
+      </Text>
+      <PrimaryButton onPress={onStartNewGame}>Start New Game</PrimaryButton>
     </View>
+    </ScrollView>
   );
 }
 export default GameOverScreen;
-const deviceWidth = Dimensions.get('window').width ;
+//const deviceWidth = Dimensions.get('window').width ;
 
 const styles = StyleSheet.create({
   rootContainer: {
@@ -31,10 +53,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  screen:{
+    flex:1,
+  },
   imageConatiner: {
-    width: deviceWidth < 380 ? 150 : 300,
-    height: deviceWidth < 380 ? 150 : 300,
-    borderRadius: deviceWidth < 380 ? 75 : 150,
     borderWidth: 3,
     borderColor: Colors.primary500,
     overflow: "hidden",
@@ -46,9 +68,9 @@ const styles = StyleSheet.create({
   },
   summaryText: {
     fontFamily: "open-sans",
-    fontSize:24,
-    textAlign:"center",
-    marginBottom:24,
+    fontSize: 24,
+    textAlign: "center",
+    marginBottom: 24,
   },
   Highlight: {
     fontFamily: "open-sans-bold",
